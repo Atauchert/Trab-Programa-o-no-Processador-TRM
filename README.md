@@ -19,6 +19,15 @@ Desenvolva um programa que escreva na memória os N primeiros números inteiros
 ímpares maiores que zero. Seu programa deverá ser N da memória e funcionar para qualquer valor de
 N. Os valores deverão ser escritos a partir do endereço 0x20 e aparecerem contiguamente na memória.
 
+main
+	add v0,zr,1
+loop0
+	stw v0,zr,0x20
+	add v0,v0,2
+	add v1,v1,2
+	bne v0,v2,loop0
+hlt
+	
 # Problema 2: 
 Desenvolva um programa capaz de gerar os N primeiros números da sequência de
 Fibonacci. Escreva cada número gerado na memória, a partir do endereço 0x30.
