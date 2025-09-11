@@ -65,6 +65,7 @@ Escreva um programa para encontrar o maior número inteiro positivo escrito em m
 entre os endereços 0x40 e 0x80. O número encontrado deverá ser escrito na posição 0x90.
 
 main
+<<<<<<< HEAD
 
     add v2, zr, 0x40      ; v2 = 0x40 (início da busca)
     ldw v0, v2, 0         ; v0 = valor inicial em 0x40 
@@ -96,6 +97,22 @@ feito
     stw v0, zr, 0x90      ; escreve o maior valor em 0x90
     hlt                   ; encerra o programa
 
+=======
+	add v0,zr,1  ;v0 é o max
+	add v1,zr,0  ;v1 é o i
+	add v2,zr,vetor  ;vetor
+loop
+	ldw v5,v2,0x0  ;carrega v[0] para v5
+	blt v5,v0,continuo
+	add v0,v5,0
+
+continuo
+	add v2,v2,2
+	beq zr,zr,loop
+final
+	hlt
+vetor 1 2 3 4 5 6 7 8 9 
+>>>>>>> dec8d49 (alt)
 
 # Problema 4: 
 Escreva um programa que lê todos os valores escritos em memória entre as posições 0x40
