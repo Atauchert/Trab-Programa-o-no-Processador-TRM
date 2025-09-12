@@ -21,11 +21,13 @@ N. Os valores deverão ser escritos a partir do endereço 0x20 e aparecerem cont
 
 main
 	add v0,zr,1
+	add v2,zr
 loop0
-	stw v0,zr,0x20
+	stw v0,v2,0x20
+	add v2,v2,2
 	add v0,v0,2
 	add v1,v1,2
-	bne v0,v2,loop0
+	beq zr,zr,loop0
 hlt
 	
 # Problema 2: 
