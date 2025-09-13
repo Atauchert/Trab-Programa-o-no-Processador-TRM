@@ -35,18 +35,69 @@ Desenvolva um programa capaz de gerar os N primeiros números da sequência de
 Fibonacci. Escreva cada número gerado na memória, a partir do endereço 0x30.
 
 
+
 # Problema 3: 
 Escreva um programa para encontrar o maior número inteiro positivo escrito em memória
 entre os endereços 0x40 e 0x80. O número encontrado deverá ser escrito na posição 0x90.
+
+main
+    add v0,zr,1
+    add v1,zr,0
+    add v2,zr,0x40
+    add v3,zr,0x82
+loop
+    ldw v5,v2,0
+    blt v5,v0,continuo
+    add v0,v5,0
+continuo
+    add v2,v2,2
+    beq v2,v3,done
+    beq zr,zr,loop
+done
+    stw v0,zr,0x90
+    hlt
 
 # Problema 4: 
 Escreva um programa que lê todos os valores escritos em memória entre as posições 0x40
 e 0x80 e os escreve a partir da posição 0x90, somando 1 aos valores pares para que se tornem ímpares.
 Assim, todos os 64 primeiros valores na memória a partir de 0x90 devem ser ímpares.
 
+main
+    ; inicializa ponteiros
+    add   v2, zr, 0x40       ; ponteiro leitura
+    add   v3, zr, 0x90       ; fim da leitura
+    add   v4, zr, 0x90       ; ponteiro escrita
+    add   v0, zr, var_a
+    stw v0,zr,0x50
+
+loop
+    ; carrega valor da memória
+    ldw   v5, v2, 0          ; v5 = mem[v2]
+
+    ; testa se é par (v6 = v5 & 1)
+    and   v6, v5, 1          
+    beq   v6, zr, par        ; se v6 == 0 → número é par
+
+impar
+    stw   v5, v4, 0          ; escreve valor ímpar
+    add   v2, v2, 2          ; avança leitura
+    add   v4, v4, 2          ; avança escrita
+    beq   v2, v3, fim        ; terminou?
+    beq   zr, zr, loop       ; volta ao loop
+
+par
+    add   v5, v5, 1          ; v5 = v5 + 1 (força a ser ímpar)
+    beq   zr, zr, impar      ; volta para salvar
+
+var_a
+    123
+fim
+    hlt
+
 # Problema 5: 
 Escreva um programa que procura entre os endereços 0x60 e 0x70 por dois números cuja
 soma seja igual a 10. Caso este números existam, a posição deles deverá ser escrita nos endereços 0x80 e 0x90.
+
 
 # Problema 6: 
 Escreva um programa que inverte a ordem dos valores compreendidos entre os endereços
