@@ -22,12 +22,12 @@ N. Os valores deverão ser escritos a partir do endereço 0x20 e aparecerem cont
 main
 	add v0,zr,1
 	add v2,zr
-loop0
+loop
 	stw v0,v2,0x20
 	add v2,v2,2
 	add v0,v0,2
 	add v1,v1,2
-	beq zr,zr,loop0
+	beq zr,zr,loop
 hlt
 	
 # Problema 2: 
@@ -51,9 +51,9 @@ loop
     add v0,v5,0
 continuo
     add v2,v2,2
-    beq v2,v3,done
+    beq v2,v3,feito
     beq zr,zr,loop
-done
+feito
     stw v0,zr,0x90
     hlt
 
@@ -63,31 +63,31 @@ e 0x80 e os escreve a partir da posição 0x90, somando 1 aos valores pares para
 Assim, todos os 64 primeiros valores na memória a partir de 0x90 devem ser ímpares.
 
 main
-    ; inicializa ponteiros
-    add   v2, zr, 0x40       ; ponteiro leitura
-    add   v3, zr, 0x90       ; fim da leitura
-    add   v4, zr, 0x90       ; ponteiro escrita
+    
+    add   v2, zr, 0x40       
+    add   v3, zr, 0x80       
+    add   v4, zr, 0x90       
     add   v0, zr, var_a
     stw v0,zr,0x50
 
 loop
-    ; carrega valor da memória
-    ldw   v5, v2, 0          ; v5 = mem[v2]
+    
+    ldw   v5, v2, 0          
 
-    ; testa se é par (v6 = v5 & 1)
+    
     and   v6, v5, 1          
-    beq   v6, zr, par        ; se v6 == 0 → número é par
+    beq   v6, zr, par        
 
 impar
-    stw   v5, v4, 0          ; escreve valor ímpar
-    add   v2, v2, 2          ; avança leitura
-    add   v4, v4, 2          ; avança escrita
-    beq   v2, v3, fim        ; terminou?
-    beq   zr, zr, loop       ; volta ao loop
+    stw   v5, v4, 0         
+    add   v2, v2, 2       
+    add   v4, v4, 2          
+    beq   v2, v3, fim      
+    beq   zr, zr, loop       
 
 par
-    add   v5, v5, 1          ; v5 = v5 + 1 (força a ser ímpar)
-    beq   zr, zr, impar      ; volta para salvar
+    add   v5, v5, 1           
+    beq   zr, zr, impar      
 
 var_a
     123
@@ -103,6 +103,35 @@ soma seja igual a 10. Caso este números existam, a posição deles deverá ser 
 Escreva um programa que inverte a ordem dos valores compreendidos entre os endereços
 0x40 e 0x60, isto é, os valores deverão aparecer "de trás pra frente" na memória. Você não deverá ler
 ou escrever em endereços de memória fora do intervalo entre 0x40 e 0x60.
+
+main
+    add v0, zr, 0x40      
+    add v1, zr, 0x60      
+    add v2, zr, var_a
+    stw v2, zr, 0x52
+    add v3, zr, var_b
+    stw v3, zr, 0x4e
+loop
+    bge v0, v1, fim 
+      
+    ldw a0, v0, 0      
+    ldw a1, v1, 0       
+
+    stw a1, v0, 0       
+    stw a0, v1, 0        
+
+    add v0, v0, 2
+ 
+    sub v1, v1, 2
+
+    beq zr, zr, loop      
+
+var_a
+    123
+var_b
+    456
+fim
+    hlt
 
 # Problema 7: 
 Assuma uma matriz MxN, onde M está escrita no endereço 0x40, N está escrito no
