@@ -21,18 +21,15 @@ N. Os valores deverão ser escritos a partir do endereço 0x20 e aparecerem cont
 
 main
 
-    add v0,zr,1
-	add v2,zr
+    add v0,zr,1        ; inicializa v0 = 1 
+    add v2,zr          ; inicializa v2 = 0 
 
 loop
 
-	stw v0,v2,0x20
-	add v2,v2,2
-	add v0,v0,2
-	add v1,v1,2
-	beq zr,zr,loop
-
-hlt
+    stw v0,v2,0x20     ; escreve v0 na memória 
+    add v2,v2,2        ; v2 + 2
+    add v0,v0,2        ; próximo número ímpar
+    beq zr,zr,loop     ; loop infinito
 	
 # Problema 2: 
 Desenvolva um programa capaz de gerar os N primeiros números da sequência de
@@ -58,8 +55,8 @@ loop0
 	ldw v0,v3,0x42	    ;carrega o v1 no v0
 	ldw v1,v3,0x44	    ;carrega o v2 no v1
 	add v3,v3,2	        ;indice de navegação da memoria
-	add v5,v5,1	        ;indice do loop0
-	blt v5,v4,loop0	    ;volta para o loop0
+	add v5,v5,1	        ;indice do "loop0"
+	blt v5,v4,loop0	    ;volta para o "loop0"
 
 
 # Problema 3: 
@@ -68,28 +65,36 @@ entre os endereços 0x40 e 0x80. O número encontrado deverá ser escrito na pos
 
 main
 
-    add v0,zr,1
-    stw v0,zr,0x50
-    add v1,zr,0
-    add v2,zr,0x40
-    add v3,zr,0x80
+    add v2, zr, 0x40      ; v2 = 0x40 (início da busca)
+    ldw v0, v2, 0         ; v0 = valor inicial em 0x40 
+    add v3, zr, 0x82      ; v3 = limite final 
+    add v6, zr, var_a     ; v6 = valor "var_a" (para teste)
+    stw v6, zr, 0x52      ; salva "var_a" em 0x52
+    add v7, zr, var_b     ; v7 = valor "var_b" (para teste)
+    stw v7, zr, 0x4e      ; salva "var_b" em 0x4E
 
 loop
 
-    ldw v5,v2,0
-    blt v5,v0,continuo
-    add v0,v5,0
+    add v2, v2, 2         ; avança para próximo endereço
+    beq v2, v3, feito     ; se chegou no fim, vai para feito
+    ldw v5, v2, 0         ; lê valor atual da memória
+    blt v5, v0, loop      ; se valor < maior, ignora e volta
+    add v0, v5, 0         ; senão, atualiza maior valor
+    beq zr, zr, loop      ; repete até o limite ser atingindo
 
-continuo
+var_a
 
-    add v2,v2,2
-    beq v2,v3,feito
-    beq zr,zr,loop
+    123                   ; valor de "var_a" (para teste)
+
+var_b
+
+    456                   ; valor de "var_b" (para teste)
 
 feito
 
-    stw v0,zr,0x90!!!!!!!!
-    hlt
+    stw v0, zr, 0x90      ; escreve o maior valor em 0x90
+    hlt                   ; encerra o programa
+
 
 # Problema 4: 
 Escreva um programa que lê todos os valores escritos em memória entre as posições 0x40
@@ -98,38 +103,39 @@ Assim, todos os 64 primeiros valores na memória a partir de 0x90 devem ser ímp
 
 main
     
-    add   v2, zr, 0x40       
-    add   v3, zr, 0x80       
-    add   v4, zr, 0x90       
-    add   v0, zr, var_a
-    stw v0,zr,0x50
+    add   v2, zr, 0x40       ; v2 = início da leitura (0x40)
+    add   v3, zr, 0x80       ; v3 = fim da leitura (0x80)
+    add   v4, zr, 0x90       ; v4 = início da escrita na memoría (0x90)
+    add   v0, zr, var_a      ; v0 = "var_a"
+    stw   v0, zr, 0x50       ; salva "var_a" em 0x50
 
 loop
     
-    ldw   v5, v2, 0          
-    and   v6, v5, 1          
-    beq   v6, zr, par        
+    ldw   v5, v2, 0          ; carrega valor atual da memória em v5
+    and   v6, v5, 1          ; testa se v5 é par (bit menos significativo)
+    beq   v6, zr, par        ; se par, vai para "par"
 
 impar
 
-    stw   v5, v4, 0         
-    add   v2, v2, 2       
-    add   v4, v4, 2          
-    beq   v2, v3, fim      
-    beq   zr, zr, loop       
+    stw   v5, v4, 0          ; escreve valor ímpar em destino
+    add   v2, v2, 2          ; avança leitura
+    add   v4, v4, 2          ; avança escrita
+    beq   v2, v3, fim        ; se chegou ao fim (0x80), vai para "fim"
+    beq   zr, zr, loop       ; repete "loop"
 
 par
 
-    add   v5, v5, 1           
-    beq   zr, zr, impar      
+    add   v5, v5, 1          ; soma 1 ao par e torna ímpar
+    beq   zr, zr, impar      ; volta pro "loop"
 
 var_a
-
-    123
+				
+    123                      ;(valor (para teste)	
 
 fim
 
-    hlt
+    hlt                      ; fim do programa
+
 
 # Problema 5: 
 Escreva um programa que procura entre os endereços 0x60 e 0x70 por dois números cuja
@@ -143,35 +149,36 @@ ou escrever em endereços de memória fora do intervalo entre 0x40 e 0x60.
 
 main
 
-    add v0, zr, 0x40      
-    add v1, zr, 0x60      
-    add v2, zr, var_a
-    stw v2, zr, 0x52
-    add v3, zr, var_b
-    stw v3, zr, 0x4e
+    add v0, zr, 0x40      ; v0 = início do intervalo (0x40)
+    add v1, zr, 0x60      ; v1 = fim do intervalo (0x60)
+    add v2, zr, var_a     ; v2 = "var_a"
+    stw v2, zr, 0x52      ; salva "var_a" em 0x52
+    add v3, zr, var_b     ; v3 = "var_b"
+    stw v3, zr, 0x4e      ; salva "var_b" em 0x4e
 
 loop
 
-    bge v0, v1, fim   
-    ldw a0, v0, 0      
-    ldw a1, v1, 0       
-    stw a1, v0, 0       
-    stw a0, v1, 0        
-    add v0, v0, 2
-    sub v1, v1, 2
-    beq zr, zr, loop      
+    bge v0, v1, fim       ; se v0 >= v1, terminou 
+    ldw a0, v0, 0         ; carrega valor no v0 para a0
+    ldw a1, v1, 0         ; carrega valor no v1 para a1
+    stw a1, v0, 0         ; escreve valor de a1 no registrador v0
+    stw a0, v1, 0         ; escreve valor de a0 no registrador v1
+    add v0, v0, 2         ; avança ponteiro do início
+    sub v1, v1, 2         ; recua ponteiro do "fim"
+    beq zr, zr, loop      ; volta para o loop
 
 var_a
-
-    123
+			  
+    123       ; valor (para teste)            
 
 var_b
-
-    456
+			  
+    456       ; valor (para teste)            
 
 fim
 
-    hlt
+    hlt                   ; fim do programa
+
 
 # Problema 7: 
 Assuma uma matriz MxN, onde M está escrita no endereço 0x40, N está escrito no
@@ -186,24 +193,25 @@ simulador podem ser encontrados na pasta exemplo.
 
 main
 
-	add a0,zr,text		; a0 = &text
+	add a0, zr, text        ; a0 aponta para o início da string "text"
+	
 loop
 
-	ldb v0,a0		; v0 = mem[a0]
-	stw v0,zr,0xf006	; print char
-	beq v0,zr,end		; if v0 == 0, goto end
-	add a0,a0,1		; &text++
-	beq zr,zr,loop		; goto loop
+	ldb v0, a0              ; carrega 1 byte da string (caractere) em v0
+	stw v0, zr, 0xf006      ; envia caractere para a saída do simulador
+	beq v0, zr, end         ; se caractere == 0 (fim da string), vai para "end"
+	add a0, a0, 1           ; incrementa ponteiro para o próximo caractere
+	beq zr, zr, loop        ; volta para o loop
 
 end
 
-	add v0,zr,10		; print a line feed char
-	stw v0,zr,0xf006
-	hlt
+	add v0, zr, 10          ; print nova linha
+	stw v0, zr, 0xf006      
+	hlt                     ; fim da execução
 
 text	
 
-	"Alexandre, Gabriel, Gabriel, Gianlluca"
+	"Alexandre, Gabriel, Gabriel, Gianlluca" ; string com os nomes
 
 # Problema 9: 
 Escreva um programa que identifique se uma palavra é palíndrome. O número de
