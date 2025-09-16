@@ -38,8 +38,15 @@ hlt
 Desenvolva um programa capaz de gerar os N primeiros números da sequência de
 Fibonacci. Escreva cada número gerado na memória, a partir do endereço 0x30.
 
-
-
+main
+    add v0,zr       ;0
+    add v1,zr,1     ;1
+    add v2,zr       ;n da sequencia
+    add v3,zr       ;indicie do index
+    add v5,zr       ;(i)
+    add v6,zr,24    ;(n)
+    sub v4,v6,2     ;(N) = n-2
+    stw 
 # Problema 3: 
 Escreva um programa para encontrar o maior número inteiro positivo escrito em memória
 entre os endereços 0x40 e 0x80. O número encontrado deverá ser escrito na posição 0x90.
@@ -160,6 +167,27 @@ para qualquer matriz de tamanho MxN < 64.
 Escreva um programa que escreve seu nome completo na saída do simulador. Se estiver
 trabalhando com uma dupla, escreva o nome de ambos os alunos. Exemplos de escrita na saída do
 simulador podem ser encontrados na pasta exemplo.
+
+main
+
+	add a0,zr,text		; a0 = &text
+loop
+
+	ldb v0,a0		; v0 = mem[a0]
+	stw v0,zr,0xf006	; print char
+	beq v0,zr,end		; if v0 == 0, goto end
+	add a0,a0,1		; &text++
+	beq zr,zr,loop		; goto loop
+
+end
+
+	add v0,zr,10		; print a line feed char
+	stw v0,zr,0xf006
+	hlt
+
+text	
+
+	"Alexandre, Gabriel, Gabriel, Gianlluca"
 
 # Problema 9: 
 Escreva um programa que identifique se uma palavra é palíndrome. O número de
