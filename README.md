@@ -39,14 +39,29 @@ Desenvolva um programa capaz de gerar os N primeiros números da sequência de
 Fibonacci. Escreva cada número gerado na memória, a partir do endereço 0x30.
 
 main
-    add v0,zr       ;0
-    add v1,zr,1     ;1
-    add v2,zr       ;n da sequencia
-    add v3,zr       ;indicie do index
-    add v5,zr       ;(i)
-    add v6,zr,24    ;(n)
-    sub v4,v6,2     ;(N) = n-2
-    stw 
+
+	add v0,zr	        ;0
+	add v1,zr,1	        ;1
+	add v2,zr	        ;n da sequencia
+	add v3,zr	        ;indice do index
+	add v5,zr	        ;(i)
+	add v6,zr,24	    ;(n)
+	sub v4,v6,2	        ;(N) = n-2
+	stw v0,zr,0x40	    ;carrega o primeiro numero da sequencia
+	stw v1,zr,0x42	    ;carrega o segundo numero
+
+loop0
+
+	ldw v2,v3,0x40	    ;carrega na v2 um dos anteriores
+	add v2,v1	        ;soma o anterior que foi adicionado na v2 com o valor da v1
+	stw v2,v3,0x44	    ;guarda o proximo numero da sequencia na memoria
+	ldw v0,v3,0x42	    ;carrega o v1 no v0
+	ldw v1,v3,0x44	    ;carrega o v2 no v1
+	add v3,v3,2	        ;indice de navegação da memoria
+	add v5,v5,1	        ;indice do loop0
+	blt v5,v4,loop0	    ;volta para o loop0
+
+
 # Problema 3: 
 Escreva um programa para encontrar o maior número inteiro positivo escrito em memória
 entre os endereços 0x40 e 0x80. O número encontrado deverá ser escrito na posição 0x90.
