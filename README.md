@@ -20,14 +20,18 @@ Desenvolva um programa que escreva na memória os N primeiros números inteiros
 N. Os valores deverão ser escritos a partir do endereço 0x20 e aparecerem contiguamente na memória.
 
 main
-	add v0,zr,1
+
+    add v0,zr,1
 	add v2,zr
+
 loop
+
 	stw v0,v2,0x20
 	add v2,v2,2
 	add v0,v0,2
 	add v1,v1,2
 	beq zr,zr,loop
+
 hlt
 	
 # Problema 2: 
@@ -41,19 +45,26 @@ Escreva um programa para encontrar o maior número inteiro positivo escrito em m
 entre os endereços 0x40 e 0x80. O número encontrado deverá ser escrito na posição 0x90.
 
 main
+
     add v0,zr,1
     add v1,zr,0
     add v2,zr,0x40
     add v3,zr,0x82
+
 loop
+
     ldw v5,v2,0
     blt v5,v0,continuo
     add v0,v5,0
+
 continuo
+
     add v2,v2,2
     beq v2,v3,feito
     beq zr,zr,loop
+
 feito
+
     stw v0,zr,0x90
     hlt
 
@@ -73,12 +84,11 @@ main
 loop
     
     ldw   v5, v2, 0          
-
-    
     and   v6, v5, 1          
     beq   v6, zr, par        
 
 impar
+
     stw   v5, v4, 0         
     add   v2, v2, 2       
     add   v4, v4, 2          
@@ -86,12 +96,16 @@ impar
     beq   zr, zr, loop       
 
 par
+
     add   v5, v5, 1           
     beq   zr, zr, impar      
 
 var_a
+
     123
+
 fim
+
     hlt
 
 # Problema 5: 
@@ -105,32 +119,35 @@ Escreva um programa que inverte a ordem dos valores compreendidos entre os ender
 ou escrever em endereços de memória fora do intervalo entre 0x40 e 0x60.
 
 main
+
     add v0, zr, 0x40      
     add v1, zr, 0x60      
     add v2, zr, var_a
     stw v2, zr, 0x52
     add v3, zr, var_b
     stw v3, zr, 0x4e
+
 loop
-    bge v0, v1, fim 
-      
+
+    bge v0, v1, fim   
     ldw a0, v0, 0      
     ldw a1, v1, 0       
-
     stw a1, v0, 0       
     stw a0, v1, 0        
-
     add v0, v0, 2
- 
     sub v1, v1, 2
-
     beq zr, zr, loop      
 
 var_a
+
     123
+
 var_b
+
     456
+
 fim
+
     hlt
 
 # Problema 7: 
