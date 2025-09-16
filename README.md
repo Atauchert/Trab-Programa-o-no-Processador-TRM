@@ -69,9 +69,10 @@ entre os endereços 0x40 e 0x80. O número encontrado deverá ser escrito na pos
 main
 
     add v0,zr,1
+    stw v0,zr,0x50
     add v1,zr,0
     add v2,zr,0x40
-    add v3,zr,0x82
+    add v3,zr,0x80
 
 loop
 
@@ -87,7 +88,7 @@ continuo
 
 feito
 
-    stw v0,zr,0x90
+    stw v0,zr,0x90!!!!!!!!
     hlt
 
 # Problema 4: 
