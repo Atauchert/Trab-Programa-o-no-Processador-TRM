@@ -142,6 +142,54 @@ fim
 Escreva um programa que procura entre os endereços 0x60 e 0x70 por dois números cuja
 soma seja igual a 10. Caso este números existam, a posição deles deverá ser escrita nos endereços 0x80 e 0x90.
 
+main				
+
+    add v0, zr, 0x60		;v0 = 0x60 (inicio) ;apesar de noosos esforços o codigo ocupa os 2 primeiros endereçoes de busca
+    add v2, zr, 0x70		;v2 = 0x70 (fim)
+    add v7,zr,5			;numero teste
+    add v1,zr,0x60		;v1 navega pela memoria
+    stw v7,zr,0x64		;carrega  teste na memoria
+    stw v7,zr,0x68		;carrega o teste na memoria
+    and v7,v7,0			;zera a v7 para usala depois
+	
+loop_i
+
+    bge v0, v2, fim		; se v0 >= v2 -> fim
+    add v1, v1, 2		;v1 = v1 + 2 para começar a navegar 
+
+loop_j
+    
+	bge v1, v2, next_i		;se v1 >= v2 -> próximo i
+    ldw v3, v0, 0		;v3 = mem[v0]
+    ldw v4, v1, 0		;v4 = mem[v1]
+    add v3, v4			;soma dos dois numeros
+    add v6, zr, 10		;v6 = 10 para verificar a soma
+    beq v3, v6, achou		;se v3 == v6 achou
+    add v1, v1, 2		;para continuar a navegação
+    beq zr, zr, loop_j		;volta ao loop para continuar a busca
+
+next_i
+    
+	add v0, v0, 2		;avançamos para a proxima coluna da memoria
+    and v1,v1,0			;zeramos o v1 para começarmos da posiçao seguinte para que 
+    beq zr, zr, teste		;os indices nao se encontrem
+
+teste
+    
+	add v7,v7,2			;add 2 na v7 para fins de navegaçao
+    add v1,v7,0x60		;adicionamos o proximo endereço na v1 para que seja somada novamente no loop_i
+    beq zr,zr,loop_i		;sem erros assim permitindo todas s combinaçoes de endereço(essa parte foi dificil)
+
+achou
+    
+	stw v0, zr, 0x80		; grava posições em 0x80 e 0x90
+    stw v1, zr, 0x90
+    hlt
+
+fim
+
+    hlt
+
 
 # Problema 6: 
 Escreva um programa que inverte a ordem dos valores compreendidos entre os endereços
