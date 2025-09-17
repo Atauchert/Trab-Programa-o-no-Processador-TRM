@@ -29,8 +29,9 @@ loop
     stw v0,v2,0x20     ; escreve v0 na memória 
     add v2,v2,2        ; v2 + 2
     add v0,v0,2        ; próximo número ímpar
-    beq zr,zr,loop     ; loop infinito
+    beq zr,zr,loop     ;loop
 	
+
 # Problema 2: 
 Desenvolva um programa capaz de gerar os N primeiros números da sequência de
 Fibonacci. Escreva cada número gerado na memória, a partir do endereço 0x30.
