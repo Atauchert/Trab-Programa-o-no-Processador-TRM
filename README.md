@@ -229,7 +229,7 @@ fim
     hlt                   ; fim do programa
 
 
-# Problema 7: 
+# Problema 7: (escolha de questõ a não ser feita)
 Assuma uma matriz MxN, onde M está escrita no endereço 0x40, N está escrito no
 endereço 0x42 e os valores da matriz iniciam no endereço de memória 0x44. Escreva um programa que
 escreve os elementos da diagonal principal a partir do endereço 0x100. Seu programa deve funcionar
