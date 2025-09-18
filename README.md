@@ -19,6 +19,8 @@ Desenvolva um programa que escreva na memória os N primeiros números inteiros
 ímpares maiores que zero. Seu programa deverá ser N da memória e funcionar para qualquer valor de
 N. Os valores deverão ser escritos a partir do endereço 0x20 e aparecerem contiguamente na memória.
 
+Funcionamento do código: Este código escreve na  memoria os N primeiros números Ímpares inteiros que são maiores do que zero, e os guarda a partir do endereço 0x20 em diante na memoria.
+
 [1](Fotos_Exercicios/Foto_Questão1.png)
 
 main
@@ -37,6 +39,8 @@ loop
 # Problema 2: 
 Desenvolva um programa capaz de gerar os N primeiros números da sequência de
 Fibonacci. Escreva cada número gerado na memória, a partir do endereço 0x30.
+
+Funcionamento do código: Este programa gera os N primeiros números da sequencia de fibonacci e os escreve individualmente na memoria do endereço 0x30 em diante.
 
 ![2](Fotos_Exercicios/Foto_Questão2.png)
 main
@@ -66,6 +70,8 @@ loop0
 # Problema 3: 
 Escreva um programa para encontrar o maior número inteiro positivo escrito em memória
 entre os endereços 0x40 e 0x80. O número encontrado deverá ser escrito na posição 0x90.
+
+Funcionamento do código: Ele percorre todos os números do endereço 0x40 até o 0x80 e encotra o maior número inteiro positivo que estiver na memoria e o reescreve no endereço 0x90.
 
 ![3](Fotos_Exercicios/Foto_Questão3.png)
 main
@@ -105,6 +111,8 @@ feito
 Escreva um programa que lê todos os valores escritos em memória entre as posições 0x40
 e 0x80 e os escreve a partir da posição 0x90, somando 1 aos valores pares para que se tornem ímpares.
 Assim, todos os 64 primeiros valores na memória a partir de 0x90 devem ser ímpares.
+
+Funcionamento do código: O programa observa todos os valores entre 0x40 e 0x80 e os reescreve a partir do 0x90, e soma 1 a todos os pares que se tornam ímpares no processo. Fazendo assim todos os 64 números serem ímpares desde o 0x90 em diante.
 
 ![4](Fotos_Exercicios/Foto_Questão4.png)
 main
@@ -146,6 +154,8 @@ fim
 # Problema 5: 
 Escreva um programa que procura entre os endereços 0x60 e 0x70 por dois números cuja
 soma seja igual a 10. Caso este números existam, a posição deles deverá ser escrita nos endereços 0x80 e 0x90.
+
+Funcionamento do código: Este código procura por números dentro dos endereços 0x60 e 0x70 que somados tenham o resultado em 10, e então reposicionados nos endereços 0x80 e 0x90.
 
 ![5](Fotos_Exercicios/numero5.png)
 main				
@@ -202,6 +212,8 @@ Escreva um programa que inverte a ordem dos valores compreendidos entre os ender
 0x40 e 0x60, isto é, os valores deverão aparecer "de trás pra frente" na memória. Você não deverá ler
 ou escrever em endereços de memória fora do intervalo entre 0x40 e 0x60.
 
+Funcionamento do código: Este programa em específico inverte todos os números de trás pra frente somente entre os endereços 0x40 e 0x60.
+
 ![6](Fotos_Exercicios/Foto_Questão6.png)
 main
 
@@ -246,6 +258,8 @@ para qualquer matriz de tamanho MxN < 64.
 Escreva um programa que escreve seu nome completo na saída do simulador. Se estiver
 trabalhando com uma dupla, escreva o nome de ambos os alunos. Exemplos de escrita na saída do
 simulador podem ser encontrados na pasta exemplo.
+
+Funcionamento do código: Escreve o nome completo de todos os integrantes do grupo na saída do simulador.
 
 ![8](Fotos_Exercicios/Foto_Questão8.png)
 main
