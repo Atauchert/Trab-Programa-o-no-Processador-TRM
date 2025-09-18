@@ -30,7 +30,8 @@ loop
     add v2,v2,2        ; v2 + 2
     add v0,v0,2        ; próximo número ímpar
     beq zr,zr,loop     ;loop
-	
+
+Funcionamento do código: Este código escreve na  memoria os N primeiros números Ímpares inteiros que são maiores do que zero, e os guarda a partir do endereço 0x20 em diante na memoria.	
 
 # Problema 2: 
 Desenvolva um programa capaz de gerar os N primeiros números da sequência de
@@ -59,13 +60,13 @@ loop0
 	add v5,v5,1	        ;indice do "loop0"
 	blt v5,v4,loop0	    ;volta para o "loop0"
 
+Funcionamento do código: Este programa gera os N primeiros números da sequencia de fibonacci e os escreve individualmente na memoria do endereço 0x30 em diante.
 
 # Problema 3: 
 Escreva um programa para encontrar o maior número inteiro positivo escrito em memória
 entre os endereços 0x40 e 0x80. O número encontrado deverá ser escrito na posição 0x90.
 
 main
-<<<<<<< HEAD
 
     add v2, zr, 0x40      ; v2 = 0x40 (início da busca)
     ldw v0, v2, 0         ; v0 = valor inicial em 0x40 
@@ -97,22 +98,7 @@ feito
     stw v0, zr, 0x90      ; escreve o maior valor em 0x90
     hlt                   ; encerra o programa
 
-=======
-	add v0,zr,1  ;v0 é o max
-	add v1,zr,0  ;v1 é o i
-	add v2,zr,vetor  ;vetor
-loop
-	ldw v5,v2,0x0  ;carrega v[0] para v5
-	blt v5,v0,continuo
-	add v0,v5,0
-
-continuo
-	add v2,v2,2
-	beq zr,zr,loop
-final
-	hlt
-vetor 1 2 3 4 5 6 7 8 9 
->>>>>>> dec8d49 (alt)
+Funcionamento do código: Ele percorre todos os números do endereço 0x40 até o 0x80 e encotra o maior número inteiro positivo que estiver na memoria e o reescreve no endereço 0x90.
 
 # Problema 4: 
 Escreva um programa que lê todos os valores escritos em memória entre as posições 0x40
@@ -154,6 +140,7 @@ fim
 
     hlt                      ; fim do programa
 
+Funcionamento do código: O programa observa todos os valores entre 0x40 e 0x80 e os reescreve a partir do 0x90, e soma 1 a todos os pares que se tornam ímpares no processo. Fazendo assim todos os 64 números serem ímpares desde o 0x90 em diante.
 
 # Problema 5: 
 Escreva um programa que procura entre os endereços 0x60 e 0x70 por dois números cuja
@@ -207,6 +194,8 @@ fim
 
     hlt
 
+Funcionamento do código: Este código procura por números dentro dos endereços 0x60 e 0x70 que somados tenham o resultado em 10, e então reposicionados nos endereços 0x80 e 0x90. 
+
 
 # Problema 6: 
 Escreva um programa que inverte a ordem dos valores compreendidos entre os endereços
@@ -245,6 +234,7 @@ fim
 
     hlt                   ; fim do programa
 
+Funcionamento do código: Este programa em específico inverte todos os números de trás pra frente somente entre os endereços 0x40 e 0x60.
 
 # Problema 7: (escolha de questõ a não ser feita)
 Assuma uma matriz MxN, onde M está escrita no endereço 0x40, N está escrito no
@@ -277,7 +267,9 @@ end
 
 text	
 
-	"Alexandre, Gabriel, Gabriel, Gianlluca" ; string com os nomes
+	"Alexandre, Gabriel, Gabriel, Gianlucca" ; string com os nomes
+
+Funcionamento do código: Escreve o nome completo de todos os integrantes do grupo na saída do simulaor.
 
 # Problema 9: 
 Escreva um programa que identifique se uma palavra é palíndrome. O número de
