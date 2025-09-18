@@ -286,8 +286,6 @@ text
 
 Funcionamento do código: Escreve o nome completo de todos os integrantes do grupo na saída do simulaor.
 
-![8](Fotos_Exercicios/Foto_Questão8.png)
-
 # Problema 9: 
 Escreva um programa que identifique se uma palavra é palíndrome. O número de
 caracteres na palavra deve ser lido do endereço 0x60 da memória, enquanto a palavra deve iniciar no
