@@ -144,7 +144,7 @@ par
 
 var_a
 				
-    123                      ;(valor (para teste)	
+    123                      ;(valor (para teste)(retirar este comentario para quando for testar, se não o codígo não funciona)	
 
 fim
 
@@ -237,11 +237,11 @@ loop
 
 var_a
 			  
-    123       ; valor (para teste)            
+    123       ; valor (para teste)(retirar este comentario para quando for testar, se não o codígo não funciona)	            
 
 var_b
 			  
-    456       ; valor (para teste)            
+    456       ; valor (para teste)(retirar este comentario para quando for testar, se não o codígo não funciona)	            
 
 fim
 
