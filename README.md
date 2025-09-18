@@ -31,6 +31,7 @@ loop
     add v0,v0,2        ; próximo número ímpar
     beq zr,zr,loop     ;loop
 	
+![1](Fotos_Exercicios/Foto_Questão1)
 
 # Problema 2: 
 Desenvolva um programa capaz de gerar os N primeiros números da sequência de
@@ -59,6 +60,7 @@ loop0
 	add v5,v5,1	        ;indice do "loop0"
 	blt v5,v4,loop0	    ;volta para o "loop0"
 
+![2](Fotos_Exercicios/Foto_Questão2)
 
 # Problema 3: 
 Escreva um programa para encontrar o maior número inteiro positivo escrito em memória
@@ -96,6 +98,7 @@ feito
     stw v0, zr, 0x90      ; escreve o maior valor em 0x90
     hlt                   ; encerra o programa
 
+![3](Fotos_Exercicios/Foto_Questão3)
 
 # Problema 4: 
 Escreva um programa que lê todos os valores escritos em memória entre as posições 0x40
@@ -137,6 +140,7 @@ fim
 
     hlt                      ; fim do programa
 
+![4](Fotos_Exercicios/Foto_Questão4)
 
 # Problema 5: 
 Escreva um programa que procura entre os endereços 0x60 e 0x70 por dois números cuja
@@ -190,6 +194,7 @@ fim
 
     hlt
 
+![5](Fotos_Exercicios/numero5)
 
 # Problema 6: 
 Escreva um programa que inverte a ordem dos valores compreendidos entre os endereços
@@ -228,6 +233,7 @@ fim
 
     hlt                   ; fim do programa
 
+![6](Fotos_Exercicios/Foto_Questão6)
 
 # Problema 7: (escolha de questõ a não ser feita)
 Assuma uma matriz MxN, onde M está escrita no endereço 0x40, N está escrito no
@@ -261,6 +267,8 @@ end
 text	
 
 	"Alexandre, Gabriel, Gabriel, Gianlluca" ; string com os nomes
+
+![8](Fotos_Exercicios/Foto_Questão8)
 
 # Problema 9: 
 Escreva um programa que identifique se uma palavra é palíndrome. O número de
